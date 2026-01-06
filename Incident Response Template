@@ -1,0 +1,292 @@
+# Understanding the Types of Cybersecurity Assessments
+
+A cybersecurity assessment is a systematic exercise that is used to test your current security controls and evaluate how they stack up against known vulnerabilities in a controlled and methodical way. Different types of (cyber)security assessments can be used to verify different parts of the security posture and validate the overall cybersecurity program.
+
+In the following sections, we are going to touch on the following common cybersecurity assessment types:
+
+* Risk assessments
+* Red team exercises
+* Blue team exercises
+* Penetration testing
+
+We will discuss these assessments in more detail and perform hands-on exercises regarding these methodologies in upcoming chapters.
+
+## Risk Assessments
+
+The business dictionary defines risk assessment as follows:
+
+> "The identification, evaluation, and estimation of the levels of risks involved in a situation, their comparison against benchmarks or standards, and determination of an acceptable level of risk."
+
+In other words, risk assessments are about discovering the potential things that could go wrong with a situation such as the setup of a system or environment. By discovering the flaws or vulnerabilities of that system, the potential of something going wrong and the impact of the occurrence can be determined.
+
+The following principal steps are typically taken in an ICS risk assessment:
+
+1. Asset identification
+2. System characterization
+3. Vulnerability identification
+4. Threat modeling
+5. Risk calculation
+6. Mitigation prioritization and planning
+
+The intensity and scope of each step will vary depending on the maturity of the security program that the system under consideration (SUC) is implementing. Let’s briefly go over these main steps of a risk assessment.
+
+## Asset Identification
+
+Under the motto of *you cannot defend what you don't know you have*, this first step, asset identification, is arguably the most important step of the risk assessment process and of the overall security program in general. During this step, as many assets as possible (preferably all assets) should be uncovered in the risk assessment target environment.
+
+Asset discovery and identification are performed by conducting network architecture and documentation reviews, performing scans, or even doing a physical inventory of assets that are hiding in some corner on the production floor.
+
+Assets that are not identified during this step will not be part of the rest of the risk assessment process, so extra care should be given to this step.
+
+## System Characterization
+
+System characterization is the process of finding specifics and details around an asset discovered from the previous step. By holding tabletop exercises, performing interviews, and doing research, we aim to answer the following main questions regarding our ICS assets:
+
+* What is this asset’s function?
+* What is the asset’s location in the overall process?
+* What does the asset depend on?
+* What other assets depend on this asset?
+* Who owns this asset?
+* What is the asset’s value?
+* What is the asset’s criticality to the overall production process?
+
+Being able to answer these questions allows us to assess the likelihood of a compromise or the impact of a compromise more easily on the asset or on the system the asset is a part of, which allows us to calculate a more accurate risk scoring for the asset. Risk scoring will be discussed shortly.
+
+## Vulnerability Identification
+
+The next step in the risk assessment process is vulnerability identification. During this step, we try to uncover as many vulnerabilities as possible in the assets that we have identified and characterized up to this point. We can use a variety of techniques to uncover vulnerabilities, both manual and automatic (using tools). We will look at some methods of vulnerability identification as part of Chapter 15, *Industrial Control System Risk Assessments*, and Chapter 17, *Penetration Testing ICS Environments*.
+
+## Threat Modeling
+
+Threat modeling is a structured process through which we try to identify all potential risk scenarios by combining the information we have gathered up till now. A risk scenario is a way to describe how a vulnerability in an asset can be exploited by a threat actor (attacker). Threat modeling is where ICS-specific risk assessments differ the most from regular IT assessments. This is also where having an ICS-centric security professional perform the task has the most benefit, as we will discuss in detail in Chapter 15, *Industrial Control System Risk Assessments*.
+
+## Penetration Testing
+
+At this stage, I want to point out the benefits of conducting a penetration test to support and expand upon the vulnerability identification and threat modeling efforts. A penetration test can add the verification of discovered vulnerabilities and allows for more accurate feasibility likelihood and impact scoring, making the overall risk assessment more accurate, and will give an overall better return on investment due to the ability to make actionable decisions during the mitigation prioritization and planning stage.
+
+We will discuss penetration testing in the upcoming *Penetration Testing* section and in more detail with the help of hands-on exercises in Chapter 17, *Penetration Testing ICS Environments*.
+
+## Risk Calculation
+
+The risk calculation step is probably the most difficult part of the risk assessment process. This is where we need to put some numbers behind the discovered risk that allow us to start prioritizing what risk we address first and how many resources we should commit to the remediation efforts. The following scoring equation will be explained in detail in Chapter 15, *Industrial Control System Risk Assessments*, but is shown here to illustrate the inherent complexities of the risk calculation process:
+
+$$
+\text{Risk} = \frac{\text{Severity} + (\text{Criticality} \times 2) + (\text{Likelihood} \times 2) + (\text{Impact} \times 2)}{4}
+$$
+
+In this scoring equation, the following applies:
+
+* **Severity** is scoring that reflects how bad this vulnerability is. The scoring is something we look up from a service such as the Common Vulnerability Scoring System (CVSS), [https://www.first.org/cvss/](https://www.first.org/cvss/), which provides an open framework for communicating the characteristics and impacts of IT vulnerabilities.
+
+* **Criticality** is scoring that reflects the importance of the asset to the overall production process. This scoring is not something we can look up, but needs to be a correlated judgment from the asset owners and process experts.
+
+* **Likelihood** is scoring reflecting the chance of the vulnerability becoming a successful threat event or, in other words, the chance that the vulnerability will be successfully exploited. This scoring is an educated guess from the ICS cybersecurity experts, taking into account associated factors of the vulnerability and the asset and its environment. This is where a penetration test has the most impact, as we will discuss shortly in the *Penetration testing* section.
+
+* **Impact** is scoring that reflects the financial impact on the company in case of a compromise or failure of this system, the associated damage to the image of the company, the potential impact on the environment, and the associated risk to employees and public health safety. This scoring is part hard numbers (asset value) and part educated guess by the asset/system owners and process experts (how much of the process will go down when this asset goes down and for how long?).
+
+I hope you start to see the complexity of the risk calculation process. At the end of the process, we should be able to put a risk number behind all our assets that show how much risk they carry. We now have a way to correlate and start prioritizing and planning to address this risk.
+
+## Ongoing Risk Management Activities
+
+Keeping an ICS security program and accompanying risk management activities accurate and up to date requires a cyclic sequence of activities.
+
+These activities are outlined here:
+
+* **Assessing risk**: To verify the completeness of the applied security controls and mitigation and to assess against the newest standards and policies, recurring risk assessment should be scheduled. The assessment can become increasingly more involved as the overall security program evolves, to uncover more detailed and harder-to-spot vulnerabilities. A risk assessment should be completed once a year at a minimum.
+
+* **Responding to identified risk**: As risk is detected by a monitoring system or revealed by a risk assessment, it must be addressed by a (dedicated) team.
+
+* **Monitoring risk evolution and mitigation**: Monitoring risk is geared around keeping track of mitigation efforts on issues found during a risk assessment or discovered by a monitoring system such as an endpoint security client or an IDS/IPS sensor.
+
+## Incident Severity Determination Procedure
+
+Severity determination is an important step in incident handling because it prescribes who needs to be involved, the appropriate containment procedures (extent and immediacy), and the communications plan to execute (that is, who needs to be informed).
+
+The Incident Lead leads the discussion, while the OT Administrator and the relevant Technology Owner or owners are expected to participate. The Incident Lead may also invite others to join who might have additional insight or contributions.
+
+Incident severity determination should take several factors into account: the safety of end users impacted, the criticality of the system(s) affected, the sensitivity of any data involved, and the overall impact on the ability of the company to fulfill its mission. Let’s look at the severity categories (**high, medium, low, not an incident**).
+
+### High-Severity Incident
+
+A security incident should be considered of **high severity** if the incident displays any of the following characteristics:
+
+* The incident jeopardizes the safety of any individual.
+* The incident threatens to impact (or impacts) production-critical systems or services.
+* The incident poses a serious threat to financial risk or legal liability.
+* If there is suspicion of ransomware.
+* If there is a risk of exposing sensitive data.
+* The incident can propagate to or attack other networks, systems, and devices, internally or externally of the plant/facility/department.
+* The incident displays terroristic threat characteristics or somehow threatens human life or company/public property.
+
+### Medium-Severity Incident
+
+A security incident should be considered a **medium-severity incident** if it does not classify as high and the incident displays any of the following characteristics:
+
+* The incident threatens to impact (or impacts) a significant number of OT resources or personnel. Production can continue but may be severely hindered.
+* Impacted systems do not contain sensitive data.
+* Does not impact a production-critical system or service.
+
+### Low-Severity Incident
+
+Low-severity incidents are not categorized as medium or high category incidents and include the following characteristics:
+
+* The incident only impacts or threatens to impact a small number of employees, contractors, vendors, or OT resources.
+* Impacted systems do not contain any production- or OT-related data.
+* There is little to no risk of the incident spreading and impacting other plants/facilities/departments or networks.
+
+### Not an Incident (Event)
+
+If the incident response investigation reveals that either the incident has no cybersecurity implication or that the existing protective systems are adequate at preventing harm, the incident may be reclassified as an event, and no further action beyond updating the incident response form will be mandated.
+
+Some examples of events include the following:
+
+* Suspicious behavior was found to be the root cause of failing hardware.
+* Investigating unknown software determines it was, in fact, properly installed under MoC.
+* A SIEM alert was determined to be a nuisance alert, indicating only a non-ideal configuration of SIEM.
+* The antivirus log indicates adware was detected and automatically quarantined.
+* The firewall logs indicate unauthorized access was denied, per policy.
+
+The incident response documentation should be maintained for a cybersecurity event per the applicable data retention policy.
+
+## Reviewing and Reporting the Status of Asset Backups
+
+Eradicating and recovering from incidents often requires restoring an asset or system from backup or rebuilding it from source media. Restoring from a backup usually allows for a faster and smoother recovery. It is prudent to ensure that recent online and offline backups are available for each asset during the periodic incident response preparation process.
+
+Each Technology Owner should review the available backups for the assets in their area of responsibility against the backup and restore standards in that policy. Findings should be reported to the OT Administrator.
+
+## Reviewing and Reporting the Status of Automated Tools
+
+Automated tools have been deployed in the OT environment to aid in information gathering. It is prudent to review their operation during the periodic incident response preparation process to verify their operation and to identify misconfigurations, limitations, nuisance alarms, and frequent alerts. Each Technology Owner should review alerts and indicators relevant to the assets in their area of responsibility, as well as the status of the tools. All findings should be reported to the OT Administrator.
+
+Automated tools in the OT environment may include the following:
+
+* Antivirus/malware prevention
+* Security Information and Event Log Management (SIEM)
+* Intrusion detection
+* File integrity checking
+* Windows Server event logs
+* Application logs
+* Network device logs
+* Infrastructure/network monitoring
+
+Recommendations for the SIEM system include the following:
+
+* Has a log audit been recently performed to detect any anomalous correlating activities?
+* Have any new applications or hardware been introduced into the OT environment that require security monitoring?
+
+## Reviewing and Reporting Known OT Security Risks
+
+The Technology Owners are the most knowledgeable about the risks that exist within their areas of responsibility. It is prudent to review those risks during the periodic incident response preparation process to avoid becoming complacent with the existing risk level.
+
+Some of the questions to be considered during that review include the following:
+
+* Which OT assets are running an obsolete operating system?
+* What is the mitigation and replacement plan for those assets?
+* Which OT assets have and have not had at least one security patch applied in the past year?
+* Are there OT assets with known vulnerabilities that have not been patched?
+* Which OT assets are running unsupported hardware or software?
+* What is the mitigation and replacement plan for those assets?
+* What risks have been identified during MoC processes?
+
+Findings should be reported to the OT Administrator.
+
+## Incident Simulation Exercise
+
+Periodically performing exercises that simulate incidents and how they are handled can be very useful for preparing potential incident handling role holders. It also helps reveal issues with the incident handling policy, process, and procedures. However, these exercises require that OT staff take valuable time away from normal responsibilities. For this reason, this task is marked as optional for any given periodic incident response preparation process, but ought to occur at a minimum frequency of once every 3 years or after significant changes have been made to personnel within the OT staff.
+
+The NIST document *Guide to Test, Training, and Exercise Programs for IT Plans and Capabilities (SP 800-84)* outlines the use of tests, tabletop exercises, and functional exercises for improving readiness. In this context, tests would involve simulating an incident by disabling an OT asset, service, or software application in the actual OT environment (primary or secondary/standby). Conversely, functional exercises would mean simulating an incident in an offline OT environment (such as a development/test or training environment). The third option, tabletop exercises, entails a discussion-based simulation where a facilitator presents a scenario and asks questions to guide participants through their roles in the process.
+
+Tabletop exercises typically represent the least cost in terms of operational impact and time. They can be quite effective when facilitated with a clear objective by a staff member, contractor, or vendor who is both experienced in incident handling and is familiar with the organization’s OT policies, processes, and procedures.
+
+## Preparing a Recommendations Summary
+
+The OT Administrator is responsible for reviewing the reports from the Technology Owners about backups, automated tools, and known risks. The OT Administrator is also responsible for reviewing the results of the incident simulation exercise, if one was held. The outcome should be a recommendations summary that aims to summarize the overall readiness to respond to OT security incidents and recommend and prioritize actions for improvement.
+
+This recommendations summary, which is to be prepared at the end of the periodic incident response preparation process, is to be kept by the OT Administrator and used during budgeting and resource planning activities to guide decisions. Since it may contain detailed information about OT environment security vulnerabilities, this document should be treated and classified as confidential information and distributed on a need-to-know basis.
+
+## Incident Handling Process
+
+The tasks of the incident handling process are mapped to five steps of the SANS Institute’s six-step incident handling process: **identification, containment, eradication, recovery, and lessons learned**. These procedures, which describe how to follow the incident handling process, have been grouped by the analogous SANS Institute process step.
+
+## Identification Phase
+
+### Goals of the Identification Phase
+
+The goals of the identification phase are as follows:
+
+* Quickly ruling out human error, misconfiguration, and false positives
+* Detecting deviations from the norm
+* Collecting evidence from tools and sources to understand what is occurring
+* Determining the nature and scope of the incident
+
+The identification phase begins with detecting a specific event, referred to as a **suspected incident**. It is reported to the OT Administrator, or designated person, who determines whether it is in scope for being handled as an OT incident.
+
+If there is any doubt that the event is assumed to be an OT security incident, incident response is begun per this established process and procedure. Out-of-scope incidents should be turned over to the IT security team immediately for handling, as per their established process.
+
+The OT Administrator is responsible for alerting the relevant OT technology owners and assigning an Incident Lead as quickly as possible once the scope has been determined for a suspected OT security incident.
+
+Each alerted Technology Owner is expected to immediately begin analysis and short-term containment procedures, while the Incident Lead initiates the Incident Response Form and begins gathering information.
+
+While identification officially ends after severity determination, in practice, analysis activities may continue until incident closure.
+
+### Notes on Incident Detection
+
+While some incidents have very subtle symptoms and can go undetected for a long time, others will cause a high volume of alerts or symptoms that are quite obvious. Antivirus, intrusion detection, and event management tools can be helpful in reporting early signs of an incident. Other incidents follow known attack vectors such as infected removable media, a lost or stolen laptop, or improper usage of the OT environment.
+
+Some signs of a suspected incident include the following:
+
+* Unusually high network traffic
+* Event logs containing multiple failed login attempts
+* Antivirus alert for detected malware
+* SIEM alert
+* Gut feeling from regular users
+
+## Incident Reporting Procedure
+
+A suspected OT security incident can be reported to the OT Administrator, or designated person, by any means available. A phone call and/or email are normally expected.
+
+Alternate future means could include reporting via an internal web page, sending a secure instant message to a dedicated incident reporting address, emailing a group email address, and so on. It is recommended you have at least one method of reporting that ensures anonymity.
+
+The basics of reporting suspected incidents should be part of the security awareness training given to all who interact with the OT environment.
+
+## Incident Scope Determination Procedure
+
+In general, OT security incidents are incidents that involve OT assets and/or networks. Security incidents that originate from the enterprise network or assets should be determined to be out of scope for this OT process and procedure, and they should be handled primarily via IT incident handling processes and procedures. However, if you can separate out OT symptoms, those should be handled by this process and reference the related IT incident in all documentation.
+
+The final judgement of scope rests with the OT Administrator.
+
+## Alerting the Technology Owner(s)
+
+It is expected that the OT Administrator will contact the relevant Technology Owner or owners in person or via phone call, if possible, immediately after in-scope determination. Text message contact may be reasonable if the reported incident symptoms are of low severity.
+
+## Incident Lead Assignment Procedure
+
+It is the OT Administrator’s responsibility to designate an Incident Lead for each in-scope suspected incident. The Incident Lead could be the OT Administrator, a Technology Owner, other technical personnel (employee, contractor, or vendor), or other personnel with technical project management skills (employee, contractor, or vendor).
+
+The Incident Lead has the ultimate responsibility and authority during the incident handling process to coordinate and manage all aspects of the incident response effort, including coordinating communications. The Incident Lead facilitates severity and “lessons learned” group discussions and is responsible for completing the Incident Response Form documentation.
+
+## Incident Analysis Procedure
+
+The immediate concern in the analysis step is validating the suspected incident. The Technology Owner(s) should examine OT assets, networks, and systems thought to be involved and determine whether the reported symptoms can be confirmed. Next, the Technology Owner(s) should try to rule out false positives and determine whether the root cause is likely to be unrelated to security, such as hardware failures or lack of disk space. As the Technology Owner investigates and gathers evidence, the goal is to try to understand the nature and scope of the incident and report the findings as inputs to the severity determination step. Findings should be documented regarding what was found in which tool on what OT asset, when, and by whom in a notebook.
+
+Example analysis points include the following:
+
+* SIEM alerts
+* Operating system service or application logs (the Windows event log, for example)
+* Database logs
+* System performance metrics (CPU and memory usage)
+* Network traffic flows/patterns
+
+  * Compare locally reported network activity with externally observed actual activity
+* Survey similar assets
+
+  * Look for replication of incident symptoms
+* Identify whether the affected asset stores confidential data (at risk of exfiltration)
+
+No containment or eradication activities occur in this phase. The findings from incident analysis provide information about short-term containment and severity determination. Findings of a sensitive nature, such as evidence of malfeasance, should be secured and shared only on a “need to know” basis.
+
+## Incident Report Form Procedure
+
+The Incident Lead is responsible for the Incident Report Form documentation. If possible, the Incident Lead should interview the Incident Reporter directly to capture the initial report in as much detail as possible. The form could be on paper or in electronic format (for example, Word or Excel). If paper copies are used, additional pages should be attached since many of the fields are too small to hold sufficient detail. Future enhancements could include converting the Incident Response Form into a fillable PDF or a web form.
+
+An example Incident Response Form is included in the *Example incident report form* section. General instructions on how to fill out the form are included there.
