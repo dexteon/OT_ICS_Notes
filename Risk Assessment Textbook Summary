@@ -1,0 +1,99 @@
+# Understanding the Types of Cybersecurity Assessments
+
+A cybersecurity assessment is a systematic exercise that is used to test your current security controls and evaluate how they stack up against known vulnerabilities in a controlled and methodical way. Different types of (cyber)security assessments can be used to verify different parts of the security posture and validate the overall cybersecurity program.
+
+In the following sections, we are going to touch on the following common cybersecurity assessment types:
+
+* Risk assessments
+* Red team exercises
+* Blue team exercises
+* Penetration testing
+
+We will discuss these assessments in more detail and perform hands-on exercises regarding these methodologies in upcoming chapters.
+
+## Risk Assessments
+
+The business dictionary defines risk assessment as follows:
+
+> "The identification, evaluation, and estimation of the levels of risks involved in a situation, their comparison against benchmarks or standards, and determination of an acceptable level of risk."
+
+In other words, risk assessments are about discovering the potential things that could go wrong with a situation such as the setup of a system or environment. By discovering the flaws or vulnerabilities of that system, the potential of something going wrong and the impact of the occurrence can be determined.
+
+The following principal steps are typically taken in an ICS risk assessment:
+
+1. Asset identification
+2. System characterization
+3. Vulnerability identification
+4. Threat modeling
+5. Risk calculation
+6. Mitigation prioritization and planning
+
+The intensity and scope of each step will vary depending on the maturity of the security program that the system under consideration (SUC) is implementing. Let’s briefly go over these main steps of a risk assessment.
+
+## Asset Identification
+
+Under the motto of *you cannot defend what you don't know you have*, this first step, asset identification, is arguably the most important step of the risk assessment process and of the overall security program in general. During this step, as many assets as possible (preferably all assets) should be uncovered in the risk assessment target environment.
+
+Asset discovery and identification are performed by conducting network architecture and documentation reviews, performing scans, or even doing a physical inventory of assets that are hiding in some corner on the production floor.
+
+Assets that are not identified during this step will not be part of the rest of the risk assessment process, so extra care should be given to this step.
+
+## System Characterization
+
+System characterization is the process of finding specifics and details around an asset discovered from the previous step. By holding tabletop exercises, performing interviews, and doing research, we aim to answer the following main questions regarding our ICS assets:
+
+* What is this asset’s function?
+* What is the asset’s location in the overall process?
+* What does the asset depend on?
+* What other assets depend on this asset?
+* Who owns this asset?
+* What is the asset’s value?
+* What is the asset’s criticality to the overall production process?
+
+Being able to answer these questions allows us to assess the likelihood of a compromise or the impact of a compromise more easily on the asset or on the system the asset is a part of, which allows us to calculate a more accurate risk scoring for the asset. Risk scoring will be discussed shortly.
+
+## Vulnerability Identification
+
+The next step in the risk assessment process is vulnerability identification. During this step, we try to uncover as many vulnerabilities as possible in the assets that we have identified and characterized up to this point. We can use a variety of techniques to uncover vulnerabilities, both manual and automatic (using tools). We will look at some methods of vulnerability identification as part of Chapter 15, *Industrial Control System Risk Assessments*, and Chapter 17, *Penetration Testing ICS Environments*.
+
+## Threat Modeling
+
+Threat modeling is a structured process through which we try to identify all potential risk scenarios by combining the information we have gathered up till now. A risk scenario is a way to describe how a vulnerability in an asset can be exploited by a threat actor (attacker). Threat modeling is where ICS-specific risk assessments differ the most from regular IT assessments. This is also where having an ICS-centric security professional perform the task has the most benefit, as we will discuss in detail in Chapter 15, *Industrial Control System Risk Assessments*.
+
+## Penetration Testing
+
+At this stage, I want to point out the benefits of conducting a penetration test to support and expand upon the vulnerability identification and threat modeling efforts. A penetration test can add the verification of discovered vulnerabilities and allows for more accurate feasibility likelihood and impact scoring, making the overall risk assessment more accurate, and will give an overall better return on investment due to the ability to make actionable decisions during the mitigation prioritization and planning stage.
+
+We will discuss penetration testing in the upcoming *Penetration Testing* section and in more detail with the help of hands-on exercises in Chapter 17, *Penetration Testing ICS Environments*.
+
+## Risk Calculation
+
+The risk calculation step is probably the most difficult part of the risk assessment process. This is where we need to put some numbers behind the discovered risk that allow us to start prioritizing what risk we address first and how many resources we should commit to the remediation efforts. The following scoring equation will be explained in detail in Chapter 15, *Industrial Control System Risk Assessments*, but is shown here to illustrate the inherent complexities of the risk calculation process:
+
+$$
+\text{Risk} = \frac{\text{Severity} + (\text{Criticality} \times 2) + (\text{Likelihood} \times 2) + (\text{Impact} \times 2)}{4}
+$$
+
+In this scoring equation, the following applies:
+
+* **Severity** is scoring that reflects how bad this vulnerability is. The scoring is something we look up from a service such as the Common Vulnerability Scoring System (CVSS), [https://www.first.org/cvss/](https://www.first.org/cvss/), which provides an open framework for communicating the characteristics and impacts of IT vulnerabilities.
+
+* **Criticality** is scoring that reflects the importance of the asset to the overall production process. This scoring is not something we can look up, but needs to be a correlated judgment from the asset owners and process experts.
+
+* **Likelihood** is scoring reflecting the chance of the vulnerability becoming a successful threat event or, in other words, the chance that the vulnerability will be successfully exploited. This scoring is an educated guess from the ICS cybersecurity experts, taking into account associated factors of the vulnerability and the asset and its environment. This is where a penetration test has the most impact, as we will discuss shortly in the *Penetration testing* section.
+
+* **Impact** is scoring that reflects the financial impact on the company in case of a compromise or failure of this system, the associated damage to the image of the company, the potential impact on the environment, and the associated risk to employees and public health safety. This scoring is part hard numbers (asset value) and part educated guess by the asset/system owners and process experts (how much of the process will go down when this asset goes down and for how long?).
+
+I hope you start to see the complexity of the risk calculation process. At the end of the process, we should be able to put a risk number behind all our assets that show how much risk they carry. We now have a way to correlate and start prioritizing and planning to address this risk.
+
+## Ongoing Risk Management Activities
+
+Keeping an ICS security program and accompanying risk management activities accurate and up to date requires a cyclic sequence of activities.
+
+These activities are outlined here:
+
+* **Assessing risk**: To verify the completeness of the applied security controls and mitigation and to assess against the newest standards and policies, recurring risk assessment should be scheduled. The assessment can become increasingly more involved as the overall security program evolves, to uncover more detailed and harder-to-spot vulnerabilities. A risk assessment should be completed once a year at a minimum.
+
+* **Responding to identified risk**: As risk is detected by a monitoring system or revealed by a risk assessment, it must be addressed by a (dedicated) team.
+
+* **Monitoring risk evolution and mitigation**: Monitoring risk is geared around keeping track of mitigation efforts on issues found during a risk assessment or discovered by a monitoring system such as an endpoint security client or an IDS/IPS sensor.
