@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OT Risk Assessment Plan</title>
+  <style>
+    :root {
+      --font-family-display: Arial, sans-serif;
+      --font-weight-display: 600;
+      --font-family-content: Arial, sans-serif;
+      --font-weight-content: 400;
+      --font-size-content: 16px;
+      --line-height-content: 1.4;
+    }
+
+    body.theme-dark {
+      --color-bg-base: #0f172a;
+      --color-bg-elevated: #020617;
+      --color-bg-surface: #1e293b;
+      --color-bg-muted: #334155;
+      --color-text-primary: #f1f5f9;
+      --color-text-secondary: #cbd5e1;
+      --color-text-muted: #94a3b8;
+      --color-text-accent: #38bdf8;
+      --color-primary: #38bdf8;
+      --color-primary-foreground: #0f172a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family-content);
+      font-weight: var(--font-weight-content);
+      font-size: var(--font-size-content);
+      line-height: var(--line-height-content);
+      overflow-x: hidden;
+    }
+
+    .slide {
+      width: 960px;
+      height: 540px;
+      margin: 0 auto 20px;
+      display: flex;
+      flex-shrink: 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .row { flex-direction: row; }
+    .col { flex-direction: column; }
+    .center {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .space-between { justify-content: space-between; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .items-end { align-items: flex-end; }
+    .fill-width { flex: 1; }
+    .fill-height { flex: 1; display: flex; flex-direction: column; }
+
+    .gap-sm { gap: 0.5rem; }
+    .gap-md { gap: 1rem; }
+    .gap-lg { gap: 1.5rem; }
+    .gap-xl { gap: 2rem; }
+    .gap-2xl { gap: 3rem; }
+
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .p-12 { padding: 3rem; }
+    .p-16 { padding: 4rem; }
+
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-family-display);
+      font-weight: var(--font-weight-display);
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.25rem; }
+    h3 { font-size: 1.75rem; }
+    h4 { font-size: 1.5rem; }
+    h5 { font-size: 1.25rem; }
+    h6 { font-size: 1rem; }
+
+    .text-6xl { font-size: 3.75rem; }
+    .text-5xl { font-size: 3rem; }
+    .text-4xl { font-size: 2.25rem; }
+    .text-3xl { font-size: 1.875rem; }
+    .text-2xl { font-size: 1.5rem; }
+    .text-xl { font-size: 1.25rem; }
+    .text-lg { font-size: 1.125rem; }
+    .text-base { font-size: 1rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-xs { font-size: 0.75rem; }
+
+    .font-bold { font-weight: 700; }
+    .font-semibold { font-weight: 600; }
+    .font-medium { font-weight: 500; }
+    .font-normal { font-weight: 400; }
+
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .text-right { text-align: right; }
+
+    ul, ol {
+      margin-left: 2rem;
+      line-height: 1.8;
+    }
+
+    ul li { list-style: disc; }
+    ol li { list-style: decimal; }
+
+    li { margin-bottom: 0.75rem; }
+    li:last-child { margin-bottom: 0; }
+
+    .card-rect {
+      padding: 2rem;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .badge-critical { background-color: #dc2626; color: #fff; }
+    .badge-high { background-color: #f97316; color: #fff; }
+    .badge-medium { background-color: #eab308; color: #000; }
+    .badge-low { background-color: #22c55e; color: #000; }
+
+    .risk-box {
+      padding: 1.5rem;
+      border-left: 4px solid;
+      background-color: #1e293b;
+      color: #cbd5e1;
+    }
+
+    .risk-critical { border-left-color: #dc2626; }
+    .risk-high { border-left-color: #f97316; }
+    .risk-medium { border-left-color: #eab308; }
+    .risk-low { border-left-color: #22c55e; }
+  </style>
+<script type="text/javascript" nonce="55bd80326f094607be4f6c841d8" src="//local.adguard.org?ts=1767715231737&amp;type=content-script&amp;dmn=ppl-ai-code-interpreter-files.s3.amazonaws.com&amp;url=https%3A%2F%2Fppl-ai-code-interpreter-files.s3.amazonaws.com%2Fweb%2Fdirect-files%2F52903297f3c888a2a58c9da9190305e3%2F0f5de487-a20d-4ce0-989e-d6eac31f8742%2Fcanvas-slides%2Fpresentation.html%3Fresponse-content-disposition%3Dattachment%253B%2520filename%253DOT%2520Risk%2520Assessment%2520Plan.html%253B%2520filename%252A%253DUTF-8%2527%2527OT%252520Risk%252520Assessment%252520Plan.html%26AWSAccessKeyId%3DASIA2F3EMEYEYKBPDSP6%26Signature%3DBUUWuK6CSo2cripnyMkyl6R6bwY%253D%26x-amz-security-token%3DIQoJb3JpZ2luX2VjEJj%252F%252F%252F%252F%252F%252F%252F%252F%252F%252FwEaCXVzLWVhc3QtMSJHMEUCIQDAhQpThjcaxUzk5rv4gGjWjvYtgxl5W9MRqz0fix6XJwIgazWEMlbTdmS6KQ3d1u8Jir9Ugm6MJBQABnkRPTR%252FZkgq8wQIYRABGgw2OTk3NTMzMDk3MDUiDKn0i84nfbCDZf%252Bh8SrQBOcvCQi6FKoWE86C0GOdfVPhPkjXrb%252FZyGNJ9GK4pgAoD8lt5QV2lEyM9dx8NHRzf2YcbcPU7ST7dQAH0kgFpv2Vr53Iw2bBpxBIPvRhsBreRWxnvCm%252Fl7ZzULa3uCMCLORJhWWbnr2ypLJoyHjyePaziVpLqovJFy2S8MGuKeFxFuFvDgtm%252BaX%252BfgeNhSXvOpWkGCJ2L5p%252FGlbNhfcSACk31wTwXVXEWPAtv5DveuJE4%252By5ka1OZ%252BUyc9EY25IErXz4g1xzbhJyrxiz2WOzCLTCQvF5lv87WtWLDJgrTwt72IyB8dKLt6vXoat%252BoUKtmqTVy15BVrKpMWoTyITVQrIDBvwRhbp7iNGgtTUB1GqOEBv4K2KS2qAzaZQglqE6gnFLofVu5D4Cbq%252BKSMPq9WqhNNW1fRATWso2M%252BIXSQq7c1Zv21f1Ousx441v2LO9%252Frbr4GXWV6gcEydTqk%252FbJYnzpdY1xGiReM9JEGwbQylWRgYvFaInNNqjoLYszmIPDIjaiDptkc4FLgTVwPXhvu9brjMiCVBm5ZbNbpKVz3v8k8xLNbyhCyjfTotvNsRRi5l3RNj9anUxJxVoB9C%252BuHZvyAj0HE6aA3wWccFmO0CZBUuL51rAN0C3Zpt855A40eniJrjvyklVDQeKlF%252Bu6P0%252F8dlpdZOR6AcbxNnAJOFYhUMCt%252BlEWqhAyL2uJE5yxrlKl%252FqrVtGpD1u5f3AbY1%252FVQIc%252FD9bJLaPS4U2Xb5XXGU%252BXSMy6nVicq1%252BfOFvPeIa52XNUNJyXt2JmqcCZbgQwpOT0ygY6mAHTvQSXrRuzo7dEe3x%252F%252Fhunt%252FBSoyeLr86S8SrESQD0SHeXfJ2CyixAPxfoz76ibRoQPijM8F7Xa9pADz56cQLuDHI5Clk7ekJFaGhN1XkolKnGzx%252BkJXVfnBDw%252BCIWXWDshwuEHobaw6X0WAWWM%252BdAWqPU2q68EOKWVyw89WpVr9dzZV8i4xyPZa8%252BCGv5EVRzt%252Fh2%252BitNAA%253D%253D%26Expires%3D1767718414&amp;app=chrome.exe&amp;css=3&amp;js=1&amp;rel=1&amp;rji=1&amp;sbe=1&amp;stealth=1&amp;st-dnt"></script><script type="text/javascript" nonce="55bd80326f094607be4f6c841d8" src="//local.adguard.org?ts=1767715231737&amp;name=AdGuard%20Assistant&amp;name=AdGuard%20Popup%20Blocker&amp;name=Web%20of%20Trust&amp;type=user-script"></script></head>
+<body class="theme-dark">
+
+  <!-- Slide 1: Title -->
+  <section class="slide p-16 col center" style="background-color: #020617; color: #f1f5f9;">
+    <h1 class="text-6xl mb-4" style="color: #38bdf8;">OT Risk Assessment Plan</h1>
+    <p class="text-2xl" style="color: #cbd5e1;">Securing Critical Infrastructure at Verizon</p>
+    <p class="text-sm mt-8" style="color: #94a3b8;">Operational Technology (OT) Security Program</p>
+    <p class="text-xs mt-2" style="color: #64748b;">January 2026</p>
+  </section>
+
+  <!-- Slide 2: What is Risk Assessment? -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">1. What Is a Risk Assessment?</h2>
+    <ul class="text-lg" style="color: #cbd5e1;">
+      <li><strong>Systematic identification</strong> of assets, threats, and vulnerabilities in OT systems</li>
+      <li><strong>Scoring</strong> of likelihood and impact to prioritize what matters most</li>
+      <li><strong>Control design</strong> aligned to NIST 800-82 and ISA 62443 standards</li>
+      <li><strong>Residual risk decision</strong>: Mitigate, accept, transfer, or avoid</li>
+    </ul>
+  </section>
+
+  <!-- Slide 3: Why It Matters for Verizon -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">2. Why It Matters for Verizon</h2>
+    <div class="fill-height">
+      <ul class="text-lg" style="color: #cbd5e1;">
+        <li><strong>Mission-Critical:</strong> Power &amp; cooling disruptions impact 8+ NECs nationwide</li>
+        <li><strong>Safety:</strong> BAS failures can affect employee/public safety</li>
+        <li><strong>Compliance:</strong> NERC CIP, NIST CSF, ISA 62443 expectations</li>
+        <li><strong>Ransomware:</strong> 87% increase in OT-targeted attacks (2024)</li>
+        <li><strong>Operational Visibility:</strong> No loss of control during containment</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Slide 4: NIST 800-82 Overview -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">3. NIST SP 800-82: ICS Security Guide</h2>
+    <div class="fill-height">
+      <ul class="text-lg" style="color: #cbd5e1;">
+        <li><strong>Standard for Operational Technology (OT)</strong> – mandatory for critical infrastructure</li>
+        <li><strong>Risk Management Framework (RMF):</strong> Categorize → Select → Implement → Monitor</li>
+        <li><strong>Unique OT Considerations:</strong> Safety, availability, operational constraints</li>
+        <li><strong>Defense-in-Depth:</strong> Multi-layer controls (technical, administrative, physical)</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Slide 5: ISA 62443 Security Levels -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">4. ISA/IEC 62443: Security Levels</h2>
+    <div class="fill-height row gap-lg">
+      <div class="fill-width card-rect" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">SL 1–2</h4>
+        <p style="color: #cbd5e1; font-size: 0.95rem;">Basic protection; unintentional misuse</p>
+      </div>
+      <div class="fill-width card-rect" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">SL 3</h4>
+        <p style="color: #cbd5e1; font-size: 0.95rem;">Moderate resources; sophisticated attacks</p>
+      </div>
+      <div class="fill-width card-rect" style="background-color: #dc2626;">
+        <h4 style="color: #fff;">SL 4</h4>
+        <p style="color: #fff; font-size: 0.95rem;">Fortress-level; extensive APT capabilities</p>
+      </div>
+    </div>
+    <p class="text-sm mt-6" style="color: #94a3b8;"><strong>Target:</strong> NEC critical systems → SL 3+; PLCs with no patch path → SL 2 + compensating controls</p>
+  </section>
+
+  <!-- Slide 6: Five-Phase Approach -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">5. Our Five-Phase Risk Assessment Model</h2>
+    <div class="fill-height col gap-md">
+      <div class="row gap-md">
+        <div style="background-color: #38bdf8; color: #0f172a; padding: 1rem; flex: 1; border-radius: 0.25rem;">
+          <strong>Phase 1: Identify</strong><br/>
+          <span style="font-size: 0.9rem;">Assets, zones, criticality</span>
+        </div>
+        <div style="background-color: #0ea5e9; color: #0f172a; padding: 1rem; flex: 1; border-radius: 0.25rem;">
+          <strong>Phase 2: Assess</strong><br/>
+          <span style="font-size: 0.9rem;">Threat &amp; vulnerability</span>
+        </div>
+        <div style="background-color: #06b6d4; color: #0f172a; padding: 1rem; flex: 1; border-radius: 0.25rem;">
+          <strong>Phase 3: Protect</strong><br/>
+          <span style="font-size: 0.9rem;">Controls &amp; hardening</span>
+        </div>
+      </div>
+      <div class="row gap-md">
+        <div style="background-color: #14b8a6; color: #0f172a; padding: 1rem; flex: 1; border-radius: 0.25rem;">
+          <strong>Phase 4: Detect</strong><br/>
+          <span style="font-size: 0.9rem;">Monitoring &amp; baselines</span>
+        </div>
+        <div style="background-color: #10b981; color: #0f172a; padding: 1rem; flex: 1; border-radius: 0.25rem;">
+          <strong>Phase 5: Respond</strong><br/>
+          <span style="font-size: 0.9rem;">IR plan &amp; recovery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Scope & Sites -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">6. Scope: Priority Sites</h2>
+    <div class="fill-height row gap-lg">
+      <div class="fill-width">
+        <h4 style="color: #38bdf8;">8 NECs (Tier 1)</h4>
+        <ul class="text-sm" style="color: #cbd5e1; margin-left: 1rem;">
+          <li>Branchburg (2 sites)</li>
+          <li>Southlake, Arlington, Omaha</li>
+          <li>Colorado Springs, Rocklin</li>
+        </ul>
+      </div>
+      <div class="fill-width">
+        <h4 style="color: #38bdf8;">60+ SAPs &amp; TAPs (Tier 2)</h4>
+        <ul class="text-sm" style="color: #cbd5e1; margin-left: 1rem;">
+          <li>Build assessment template</li>
+          <li>Pilot 3–5 sites Q1</li>
+          <li>Roll out nationally Q2</li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-sm mt-6" style="color: #94a3b8;"><strong>Focus Assets:</strong> BAS controllers (ALC, Tridium, Delta), power/cooling PLCs, HMI/engineering laptops</p>
+  </section>
+
+  <!-- Slide 8: Key Hazards (Verizon Context) -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">7. Key OT Hazards (Your Environment)</h2>
+    <ul class="text-lg" style="color: #cbd5e1;">
+      <li><strong>Internet-exposed BAS/VPN:</strong> Vendor access paths + RDP into L1/L2</li>
+      <li><strong>Unpatched Controllers:</strong> KEV-listed BAS systems, legacy firmware</li>
+      <li><strong>Shared/Default Credentials:</strong> No CyberArk enforcement yet on some sites</li>
+      <li><strong>Weak Segmentation:</strong> BAS &lt;→ IT network, no Modbus firewall rules</li>
+      <li><strong>Backup Gaps:</strong> Live backups only; no offline restore tests</li>
+    </ul>
+  </section>
+
+  <!-- Slide 9: Risk Scoring Model -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">8. Risk Scoring: Likelihood × Impact</h2>
+    <div class="fill-height">
+      <div class="row gap-lg">
+        <div style="flex: 1;">
+          <h5 style="color: #38bdf8; margin-bottom: 0.5rem;">Likelihood (1–5)</h5>
+          <p style="font-size: 0.9rem; color: #cbd5e1;">1 = Rare<br/>3 = Possible<br/>5 = Certain</p>
+        </div>
+        <div style="flex: 1;">
+          <h5 style="color: #38bdf8; margin-bottom: 0.5rem;">Impact (1–5)</h5>
+          <p style="font-size: 0.9rem; color: #cbd5e1;">1 = Negligible<br/>3 = Moderate<br/>5 = Severe (safety)</p>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem; padding: 1.5rem; background-color: #1e293b; border-left: 4px solid #38bdf8;">
+        <p style="color: #cbd5e1;"><strong>Score = L × I</strong></p>
+        <p style="font-size: 0.9rem; color: #94a3b8; margin-top: 0.5rem;">1–5 = Low | 6–10 = Medium | 11–15 = High | 16–25 = Critical</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 10: Control Categories -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">9. Control Categories (NIST 800-82)</h2>
+    <ul class="text-lg" style="color: #cbd5e1;">
+      <li><strong>Segmentation:</strong> OT DMZ, firewall rules, Modbus allow-list</li>
+      <li><strong>Access Control:</strong> Remove defaults, CyberArk vaulting, MFA for remote</li>
+      <li><strong>Vulnerability Management:</strong> Patch SLA, compensating controls for EOL assets</li>
+      <li><strong>Monitoring/Detection:</strong> Splunk SIEM, baselines, anomaly alerts</li>
+      <li><strong>Backup &amp; Recovery:</strong> Offline air-gapped backups, restore tests, RTO/RPO</li>
+    </ul>
+  </section>
+
+  <!-- Slide 11: Residual Risk & Decision -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">10. Risk Disposition: 4 Paths</h2>
+    <div class="fill-height row gap-lg">
+      <div class="card-rect fill-width" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">Mitigate</h4>
+        <p style="color: #cbd5e1; font-size: 0.9rem;">Implement controls to reduce risk to acceptable level</p>
+      </div>
+      <div class="card-rect fill-width" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">Accept</h4>
+        <p style="color: #cbd5e1; font-size: 0.9rem;">Document, approve, monitor (limited to low residual only)</p>
+      </div>
+      <div class="card-rect fill-width" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">Transfer</h4>
+        <p style="color: #cbd5e1; font-size: 0.9rem;">Vendor SLA, insurance, or contractual shift</p>
+      </div>
+      <div class="card-rect fill-width" style="background-color: #1e293b;">
+        <h4 style="color: #38bdf8;">Avoid</h4>
+        <p style="color: #cbd5e1; font-size: 0.9rem;">Decommission asset or eliminate exposure</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 12: Execution Timeline -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">11. Execution Timeline</h2>
+    <div class="fill-height col gap-md">
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div style="background-color: #38bdf8; color: #0f172a; padding: 0.75rem 1rem; min-width: 100px; font-weight: 600;">Q1 2026</div>
+        <div style="color: #cbd5e1;">Finalize template, pilot 2 NECs (Southlake, Rocklin), baseline Splunk</div>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div style="background-color: #0ea5e9; color: #0f172a; padding: 0.75rem 1rem; min-width: 100px; font-weight: 600;">Q2 2026</div>
+        <div style="color: #cbd5e1;">Assess remaining 6 NECs, start SAP pilot, begin CyberArk rollout</div>
+      </div>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <div style="background-color: #06b6d4; color: #0f172a; padding: 0.75rem 1rem; min-width: 100px; font-weight: 600;">Q3–Q4 2026</div>
+        <div style="color: #cbd5e1;">Roll out controls, quarterly reviews, metrics reporting</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 13: Team & Responsibilities -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">12. Team &amp; Responsibilities</h2>
+    <div class="fill-height row gap-lg">
+      <div class="fill-width card-rect" style="background-color: #1e293b;">
+        <h5 style="color: #38bdf8;">Teon (Incident Response)</h5>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">IRP development, backup strategy, vendor coordination</p>
+      </div>
+      <div class="fill-width card-rect" style="background-color: #1e293b;">
+        <h5 style="color: #38bdf8;">Jessica (Vulnerability Mgmt)</h5>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">CVE/KEV tracking, patch SLA, CISA notifications</p>
+      </div>
+      <div class="fill-width card-rect" style="background-color: #1e293b;">
+        <h5 style="color: #38bdf8;">Leadership</h5>
+        <p style="font-size: 0.85rem; color: #cbd5e1;">Approval, resource allocation, risk decisions</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 14: Expected Outcomes -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">13. Expected Outcomes (6–12 Months)</h2>
+    <ul class="text-lg" style="color: #cbd5e1;">
+      <li>✓ <strong>Complete asset inventory</strong> with ISA-95 zone mapping (all 8 NECs)</li>
+      <li>✓ <strong>Risk scores</strong> for all critical systems (hazard → residual level)</li>
+      <li>✓ <strong>Hardening baseline</strong> (configs, credential removal, NTP auth)</li>
+      <li>✓ <strong>CyberArk safe naming</strong> finalized + AOLR rotation enforced</li>
+      <li>✓ <strong>Splunk playbooks</strong> for anomaly detection (Modbus, auth, backup gaps)</li>
+      <li>✓ <strong>IR plan tested</strong> (tabletop + 1 live site drill)</li>
+    </ul>
+  </section>
+
+  <!-- Slide 15: Key Metrics & KPIs -->
+  <section class="slide p-16 col" style="background-color: #0f172a; color: #f1f5f9;">
+    <h2 class="mb-6" style="color: #38bdf8;">14. Measuring Success: KPIs</h2>
+    <div class="fill-height row gap-lg">
+      <div class="fill-width">
+        <h5 style="color: #38bdf8;">Security Posture</h5>
+        <ul style="font-size: 0.95rem; color: #cbd5e1; margin-left: 1rem;">
+          <li>% NECs at SL 3+</li>
+          <li>% KEV patched within SLA</li>
+          <li>% assets in CyberArk</li>
+        </ul>
+      </div>
+      <div class="fill-width">
+        <h5 style="color: #38bdf8;">Operational Resilience</h5>
+        <ul style="font-size: 0.95rem; color: #cbd5e1; margin-left: 1rem;">
+          <li>Mean time to detect (MTTD)</li>
+          <li>Backup restore success rate</li>
+          <li>IR playbook test frequency</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 16: Next Steps & Questions -->
+  <section class="slide p-16 col center" style="background-color: #020617; color: #f1f5f9;">
+    <h2 class="mb-8" style="color: #38bdf8;">Next Steps</h2>
+    <ul class="text-lg" style="color: #cbd5e1; text-align: left; display: inline-block;">
+      <li>Executive review &amp; sign-off on scope + timeline</li>
+      <li>Allocate resources (assessor, SME, OT team coordination)</li>
+      <li>Schedule pilot site walkthrough (Southlake recommended)</li>
+      <li>Finalize risk assessment template + approval workflow</li>
+    </ul>
+    <p class="text-2xl mt-12" style="color: #38bdf8;">Questions?</p>
+  </section>
+
+</body>
+</html>
